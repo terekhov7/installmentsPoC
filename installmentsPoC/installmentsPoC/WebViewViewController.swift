@@ -16,6 +16,11 @@ class WebViewViewController: UIViewController {
     
     private let webView = WKWebView()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

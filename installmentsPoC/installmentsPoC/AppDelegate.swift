@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow.init()
         
-        self.window?.rootViewController = TabBarViewController()
+        self.window?.rootViewController = UINavigationController(rootViewController: TabBarViewController())
         self.window?.makeKeyAndVisible()
         return true
     }

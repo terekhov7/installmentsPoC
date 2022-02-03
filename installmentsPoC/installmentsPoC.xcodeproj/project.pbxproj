@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78ACA6E227ABD502002ACB0D /* MoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78ACA6E127ABD502002ACB0D /* MoneyView.swift */; };
+		78ACA6E427ABD7AC002ACB0D /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78ACA6E327ABD7AC002ACB0D /* ShopView.swift */; };
 		78CEE7CC2797376A002622B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEE7CB2797376A002622B1 /* AppDelegate.swift */; };
 		78CEE7CE2797376A002622B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CEE7CD2797376A002622B1 /* SceneDelegate.swift */; };
 		78CEE7D52797376C002622B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78CEE7D42797376C002622B1 /* Assets.xcassets */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78ACA6E127ABD502002ACB0D /* MoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyView.swift; sourceTree = "<group>"; };
+		78ACA6E327ABD7AC002ACB0D /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		78CEE7C82797376A002622B1 /* installmentsPoC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = installmentsPoC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CEE7CB2797376A002622B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78CEE7CD2797376A002622B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 		78CEE7CA2797376A002622B1 /* installmentsPoC */ = {
 			isa = PBXGroup;
 			children = (
+				78ACA6E327ABD7AC002ACB0D /* ShopView.swift */,
+				78ACA6E127ABD502002ACB0D /* MoneyView.swift */,
 				78CEE7CB2797376A002622B1 /* AppDelegate.swift */,
 				78CEE7CD2797376A002622B1 /* SceneDelegate.swift */,
 				78CEE7D42797376C002622B1 /* Assets.xcassets */,
@@ -145,9 +151,11 @@
 			files = (
 				78CEE7E4279739F6002622B1 /* WebViewViewController.swift in Sources */,
 				78CEE7E0279737C7002622B1 /* TabBarViewController.swift in Sources */,
+				78ACA6E227ABD502002ACB0D /* MoneyView.swift in Sources */,
 				78CEE7E22797383B002622B1 /* ExternalViewController.swift in Sources */,
 				78CEE7CC2797376A002622B1 /* AppDelegate.swift in Sources */,
 				78CEE7E627973A64002622B1 /* SafariViewController.swift in Sources */,
+				78ACA6E427ABD7AC002ACB0D /* ShopView.swift in Sources */,
 				78CEE7CE2797376A002622B1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

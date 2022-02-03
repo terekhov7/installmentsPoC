@@ -8,6 +8,12 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isTranslucent = false
+        title = "8454.77 ₴"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

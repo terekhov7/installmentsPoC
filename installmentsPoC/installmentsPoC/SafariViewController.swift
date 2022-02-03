@@ -8,58 +8,92 @@
 import UIKit
 import SafariServices
 
-class SafariViewController: UIViewController {
-    private let firstButton = UIButton()
-    private let secondButton = UIButton()
-    private let stackView = UIStackView()
+class SafariViewController: UIViewController, ShopViewDelegate {
     
+    private let scrollView = UIScrollView()
+    private let stackView = UIStackView()
+    private let moneyView = MoneyView()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
-        
-        firstButton.setTitle("KASTA", for: .normal)
-        secondButton.setTitle("ROZETKA", for: .normal)
-        
-        [firstButton, secondButton].forEach { button in
-            button.backgroundColor = .blue
-            button.layer.cornerRadius = 5
-            button.setTitleColor(.white, for: .normal)
-            stackView.addArrangedSubview(button)
-        }
-        
-        stackView.axis = .horizontal
-        stackView.spacing = 10
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
         
-        firstButton.addTarget(self, action: #selector(firstTapped), for: .touchUpInside)
-        secondButton.addTarget(self, action: #selector(secondTapped), for: .touchUpInside)
+        scrollView.delegate = self
+        
+        stackView.addArrangedSubview(moneyView)
+        (0...5).forEach { _ in
+            let showView = ShopView()
+            showView.delegate = self
+            stackView.addArrangedSubview(showView)
+        }
+
+        scrollView.addSubview(stackView)
+        view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([
-            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
         ])
     }
     
-    @objc func firstTapped() {
-        if let url = URL(string: "https://kasta.ua/uk/") {
-             let config = SFSafariViewController.Configuration()
-             config.entersReaderIfAvailable = true
+    func buttonTapped(title: String) {
+        var link = ""
+        switch title {
+        case "Обувь":
+            link = "https://kasta.ua/uk/?main=shoes"
+        case "Все":
+            link = "https://kasta.ua/uk/"
+        case "Одежда":
+            link = "https://kasta.ua/uk/?main=men"
+        case "Детям":
+            link = "https://kasta.ua/uk/?main=children"
+        default:
+            break
+        }
+        
+        let actionSheet = UIAlertController(title: "Where do you want to open it", message: nil, preferredStyle: .actionSheet)
+            
+        if UIApplication.shared.canOpenURL(URL(string: link)!) {
+            actionSheet.addAction(UIAlertAction(title: "Safari", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                UIApplication.shared.open(URL(string: link)!, options: [:], completionHandler: nil)
+            }))
+        }
 
-             let vc = SFSafariViewController(url: url, configuration: config)
-             present(vc, animated: true)
+        if UIApplication.shared.canOpenURL(URL(string: "googlechrome://\(link.replacingOccurrences(of: "https://", with: ""))")!) {
+            actionSheet.addAction(UIAlertAction(title: "Chrome", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                UIApplication.shared.open(URL(string: "googlechrome://\(link.replacingOccurrences(of: "https://", with: ""))")!, options: [:], completionHandler: nil)
+            }))
+        }
+
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+}
+
+extension SafariViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= 70 {
+            navigationController?.navigationBar.isHidden = false
+        } else {
+            navigationController?.navigationBar.isHidden = true
         }
     }
-
-    @objc func secondTapped() {
-        if let url = URL(string: "https://rozetka.com.ua/") {
-             let config = SFSafariViewController.Configuration()
-             config.entersReaderIfAvailable = true
-
-             let vc = SFSafariViewController(url: url, configuration: config)
-             present(vc, animated: true)
-        }
-    }
-
 }

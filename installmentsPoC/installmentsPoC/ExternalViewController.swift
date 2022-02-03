@@ -12,6 +12,11 @@ class ExternalViewController: UIViewController {
     private let secondButton = UIButton()
     private let stackView = UIStackView()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
